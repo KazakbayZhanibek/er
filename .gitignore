@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.vite/
+.impeccable/
+.DS_Store
+*.log
+.env
+.env.*
+!.env.example
+
+# Local working notes and visual review captures.
+AGENTS.md
+design-qa.md
+qa/
