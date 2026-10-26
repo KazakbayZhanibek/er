@@ -37,7 +37,7 @@ export function App() {
       <a className="skip-link" href="#contenido">Saltar al contenido</a>
       <header className="site-header container" id="inicio">
         <a className="brand" href="#inicio" aria-label="Kompas, inicio">
-          <img src="/images/kompas-wordmark.webp" alt="Kompas" width="188" height="52" />
+          <img src={`${import.meta.env.BASE_URL}images/kompas-wordmark.webp`} alt="Kompas" width="188" height="52" />
         </a>
         <nav className="desktop-navigation" aria-label="Navegación principal">
           {navigation.map(([label, href]) => <a href={href} key={href}>{label}</a>)}
@@ -66,7 +66,7 @@ export function App() {
             </div>
           </div>
           <figure className="hero-image-wrap">
-            <img className="hero-image" src="/images/hero-team.webp" alt="Cuatro personas conversando alrededor de una mesa en un espacio de trabajo luminoso. Imagen ilustrativa." width="2172" height="724" fetchPriority="high" />
+            <img className="hero-image" src={`${import.meta.env.BASE_URL}images/hero-team.webp`} alt="Cuatro personas conversando alrededor de una mesa en un espacio de trabajo luminoso. Imagen ilustrativa." width="2172" height="724" fetchPriority="high" />
             <figcaption className="container">El siguiente paso, juntos.</figcaption>
           </figure>
         </section>
@@ -86,7 +86,7 @@ export function App() {
 
       <footer className="site-footer container">
         <div className="footer-top">
-          <a className="brand" href="#inicio" aria-label="Volver al inicio de Kompas"><img src="/images/kompas-wordmark.webp" alt="Kompas" width="188" height="52" /></a>
+          <a className="brand" href="#inicio" aria-label="Volver al inicio de Kompas"><img src={`${import.meta.env.BASE_URL}images/kompas-wordmark.webp`} alt="Kompas" width="188" height="52" /></a>
           <p>Personas y oportunidades,<br />en la misma dirección.</p>
           <a className="footer-top-link" href="#inicio">Volver arriba<ArrowUpRight size={21} aria-hidden="true" /></a>
         </div>

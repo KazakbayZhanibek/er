@@ -175,13 +175,13 @@ export default function ContentSections({ onOpenIntake }) {
                   controls
                   playsInline
                   preload="none"
-                  poster={`/media/${video.file}-poster.webp`}
+                  poster={`${import.meta.env.BASE_URL}media/${video.file}-poster.webp`}
                   aria-labelledby={`video-title-${video.number}`}
                   aria-describedby={`video-language-${video.number}`}
                   onPlay={(event) => pauseOtherVideos(event.currentTarget)}
                 >
-                  <source src={`/media/${video.file}.mp4`} type="video/mp4" />
-                  Tu navegador no puede reproducir este vídeo. <a href={`/media/${video.file}.mp4`}>Abrir el vídeo</a>.
+                  <source src={`${import.meta.env.BASE_URL}media/${video.file}.mp4`} type="video/mp4" />
+                  Tu navegador no puede reproducir este vídeo. <a href={`${import.meta.env.BASE_URL}media/${video.file}.mp4`}>Abrir el vídeo</a>.
                 </video>
                 <p className="section-video-language" id={`video-language-${video.number}`}>Español · Subtítulos integrados</p>
                 <details className="section-video-transcript">
