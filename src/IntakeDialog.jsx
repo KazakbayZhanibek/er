@@ -9,9 +9,9 @@ const fieldDetails = {
   email: { label: "Correo electrónico", type: "email", autoComplete: "email", placeholder: "nombre@ejemplo.es", maxLength: 254 },
   phone: { label: "Teléfono", type: "tel", autoComplete: "tel", placeholder: "Número de contacto", optional: true, maxLength: 40 },
   city: { label: "Ciudad o provincia", autoComplete: "address-level2", placeholder: "Ciudad o provincia", optional: true },
-  area: { label: "Área de interés", placeholder: "¿En qué te gustaría trabajar?", optional: true, wide: true },
+  area: { label: "Área de interés", placeholder: "Tipo de trabajo que te interesa", optional: true, wide: true },
   company: { label: "Empresa", autoComplete: "organization", placeholder: "Nombre de la empresa", wide: true },
-  need: { label: "Qué personal necesitas", placeholder: "Perfiles, tareas o necesidades del equipo", multiline: true, wide: true, maxLength: 1000 },
+  need: { label: "Necesidades de personal", placeholder: "Perfiles, tareas o necesidades del equipo", multiline: true, wide: true, maxLength: 1000 },
   message: { label: "Cuéntanos un poco más", placeholder: "Tu experiencia o lo que te gustaría compartir", multiline: true, optional: true, wide: true, maxLength: 600 },
 };
 

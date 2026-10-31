@@ -53,7 +53,7 @@ h2 { font: 400 clamp(44px, 5vw, 76px)/1.04 var(--font-display); letter-spacing: 
 .hero h1 { font-family: var(--font-display); font-size: clamp(68px, 7.88vw, 134px); line-height: .99; letter-spacing: -.055em; font-weight: 450; }
 .hero h1 span { display: block; }
 .hero-bottom { margin-top: 12px; margin-bottom: 35px; display: grid; grid-template-columns: 1fr 1fr; gap: 0; align-items: center; }
-.hero-description { font-size: clamp(17px, 1.5vw, 23px); line-height: 1.55; }
+.hero-description { font-size: clamp(17px, 1.5vw, 23px); line-height: 1.55; max-width: 28em; padding-right: 32px; }
 .hero-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .hero-actions .button { min-height: 72px; justify-content: center; gap: 19px; font-size: 22px; padding-inline: 20px; }
 .hero-image-wrap { width: calc(100% - 76px); max-width: 1640px; margin-inline: auto; }
@@ -70,6 +70,7 @@ h2 { font: 400 clamp(44px, 5vw, 76px)/1.04 var(--font-display); letter-spacing: 
 .site-footer { padding-top: 55px; padding-bottom: 26px; }
 .footer-top { display: grid; grid-template-columns: 1fr 1fr auto; align-items: center; gap: 30px; padding-bottom: 51px; }
 .footer-top p { font-size: 16px; line-height: 1.7; }
+.footer-links { display: flex; flex-direction: column; align-items: flex-start; }
 .footer-top-link { display: flex; align-items: center; gap: 19px; font-size: 14px; min-height: 44px; }
 .footer-bottom { border-top: 1px solid var(--line); padding-top: 24px; display: flex; justify-content: space-between; gap: 24px; font-size: 11px; line-height: 1.7; color: var(--muted); }
 @media (hover: hover) {
@@ -85,8 +86,7 @@ h2 { font: 400 clamp(44px, 5vw, 76px)/1.04 var(--font-display); letter-spacing: 
   .container { width: calc(100% - 64px); }
   .desktop-navigation { gap: 28px; }
   .hero-bottom { gap: 28px; margin-top: 24px; }
-  .hero-description { font-size: 17px; }
-  .desktop-break { display: none; }
+  .hero-description { font-size: 17px; padding-right: 0; }
   .hero-actions .button { min-height: 62px; padding-inline: 16px; font-size: 17px; gap: 12px; }
   .hero-image-wrap { width: calc(100% - 40px); }
   .hero-image-wrap figcaption { width: calc(100% - 24px); }
