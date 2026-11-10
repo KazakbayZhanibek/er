@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, ArrowUpRight, List, X } from '@phosphor-icons/react';
-import ContentSections, { EmployerSection } from './ContentSections.jsx';
+import ContentSections, { AdditionalSections, EmployerSection } from './ContentSections.jsx';
 import IntakeDialog from './IntakeDialog.jsx';
+import useSiteContent from './useSiteContent.js';
 
 const navigation = [
   ['Primeros pasos', '#incorporacion'],
@@ -11,6 +12,8 @@ const navigation = [
 ];
 
 export function App() {
+  const content = useSiteContent();
+  const text = content.texts;
   const [menuOpen, setMenuOpen] = useState(false);
   const [intake, setIntake] = useState(null);
   const menuButton = useRef(null);
@@ -37,7 +40,7 @@ export function App() {
       <a className="skip-link" href="#contenido">Saltar al contenido</a>
       <header className="site-header container" id="inicio">
         <a className="brand" href="#inicio" aria-label="Kompas, inicio">
-          <img src={`${import.meta.env.BASE_URL}images/kompas-wordmark.webp`} alt="Kompas" width="188" height="52" />
+          <span className="brand-monogram" aria-hidden="true">K<span>·</span></span>
         </a>
         <nav className="desktop-navigation" aria-label="Navegación principal">
           {navigation.map(([label, href]) => <a href={href} key={href}>{label}</a>)}
@@ -54,10 +57,10 @@ export function App() {
       <main id="contenido">
         <section className="hero" aria-labelledby="hero-title">
           <div className="container hero-content">
-            <p className="eyebrow hero-eyebrow">Tu próximo paso laboral</p>
-            <h1 id="hero-title"><span>Personas y oportunidades,</span><span>en la misma dirección.</span></h1>
+            <p className="eyebrow hero-eyebrow">{text.heroEyebrow}</p>
+            <h1 id="hero-title"><span>{text.heroTitleFirst}</span><span>{text.heroTitleSecond}</span></h1>
             <div className="hero-bottom">
-              <p className="hero-description">Conoce Kompas, explora nuestras opciones de empleo y prepara tu nueva etapa.</p>
+              <p className="hero-description">{text.heroDescription}</p>
               <div className="hero-actions">
                 <a href="#empleo" className="button button-primary">Busco empleo<ArrowRight size={27} weight="regular" aria-hidden="true" /></a>
                 <a href="#incorporacion" className="button button-outline">Ver los vídeos<ArrowRight size={27} weight="regular" aria-hidden="true" /></a>
@@ -70,22 +73,25 @@ export function App() {
           </figure>
         </section>
 
-        <ContentSections onOpenIntake={openIntake} />
+        <ContentSections onOpenIntake={openIntake} content={content} />
+        <AdditionalSections blocks={content.blocks} />
 
         <section className="contact-section" id="contacto" aria-labelledby="contact-title">
           <div className="container contact-layout">
-            <div><p className="eyebrow">Empecemos por una conversación</p><h2 id="contact-title">Tu siguiente paso,<br />con Kompas.</h2></div>
+            <div><p className="eyebrow">Empecemos por una conversación</p><h2 id="contact-title">{text.contactTitleFirst}<br />{text.contactTitleSecond}</h2></div>
             <div className="contact-choices">
+              <p className="contact-hours">{text.contactHours}</p>
+              <p className="contact-response">{text.contactResponse}</p>
               <button onClick={() => openIntake('candidate')} className="contact-choice"><span><small>Para personas</small>Quiero encontrar empleo</span><ArrowUpRight size={31} aria-hidden="true" /></button>
             </div>
           </div>
         </section>
-        <EmployerSection onOpenIntake={openIntake} />
+        <EmployerSection onOpenIntake={openIntake} content={content} />
       </main>
 
       <footer className="site-footer container">
         <div className="footer-top">
-          <a className="brand" href="#inicio" aria-label="Volver al inicio de Kompas"><img src={`${import.meta.env.BASE_URL}images/kompas-wordmark.webp`} alt="Kompas" width="188" height="52" /></a>
+          <a className="brand" href="#inicio" aria-label="Volver al inicio de Kompas"><span className="brand-monogram" aria-hidden="true">K<span>·</span></span></a>
           <p>Personas y oportunidades,<br />en la misma dirección.</p>
           <div className="footer-links">
             <a className="footer-top-link" href="#empresas">Para empresas<ArrowUpRight size={21} aria-hidden="true" /></a>

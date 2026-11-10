@@ -31,6 +31,7 @@ button:disabled { cursor: not-allowed; }
 img { max-width: 100%; display: block; }
 button svg, a svg { flex-shrink: 0; }
 h1, h2, h3, p, figure { margin: 0; }
+h1, h2, h3, p, dt, dd { overflow-wrap: anywhere; }
 h1, h2, h3 { font-weight: 400; }
 h2 { font: 400 clamp(44px, 5vw, 76px)/1.04 var(--font-display); letter-spacing: -.035em; }
 .container { width: calc(100% - 112px); max-width: 1600px; margin-inline: auto; }
@@ -43,6 +44,8 @@ h2 { font: 400 clamp(44px, 5vw, 76px)/1.04 var(--font-display); letter-spacing: 
 .button-outline { border-color: var(--ink); background: transparent; color: var(--ink); }
 .site-header { height: 84px; border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; position: relative; }
 .brand { display: inline-flex; align-items: center; min-height: 52px; }
+.brand-monogram { font: 550 64px/.8 var(--font-display); letter-spacing: -.08em; padding-right: 8px; }
+.brand-monogram > span { color: var(--terra); }
 .brand img { width: 182px; height: 51px; object-fit: contain; object-position: left center; }
 .desktop-navigation { display: flex; align-items: center; gap: 46px; }
 .desktop-navigation a { font-size: 15px; font-weight: 500; padding-block: 13px; position: relative; }
@@ -64,6 +67,8 @@ h2 { font: 400 clamp(44px, 5vw, 76px)/1.04 var(--font-display); letter-spacing: 
 .contact-layout .eyebrow { margin-bottom: 25px; }
 .contact-layout h2 { font-size: clamp(58px, 6.1vw, 90px); }
 .contact-choices { border-top: 1px solid #dfaa9b; }
+.contact-hours { font-size: 14px; line-height: 1.7; padding-top: 24px; }
+.contact-response { font-size: 16px; line-height: 1.7; margin-top: 12px; padding-bottom: 24px; border-bottom: 1px solid #dfaa9b; }
 .contact-choice { color: inherit; background: none; border: 0; border-bottom: 1px solid #dfaa9b; width: 100%; text-align: left; padding: 23px 0; display: flex; justify-content: space-between; gap: 15px; align-items: center; font-size: clamp(19px, 1.7vw, 26px); }
 .contact-choice small { display: block; text-transform: uppercase; letter-spacing: .13em; font-size: 10px; font-weight: 600; margin-bottom: 9px; }
 .contact-choice:focus-visible { outline-color: var(--paper); }
@@ -102,6 +107,7 @@ h2 { font: 400 clamp(44px, 5vw, 76px)/1.04 var(--font-display); letter-spacing: 
   .container { width: calc(100% - 40px); }
   .site-header { height: 76px; }
   .brand img { width: 151px; height: 43px; }
+  .brand-monogram { font-size: 53px; }
   .desktop-navigation { display: none; }
   .menu-toggle { display: flex; align-items: center; gap: 9px; background: none; border: 0; padding: 10px 0 10px 10px; color: var(--ink); min-height: 44px; font-size: 14px; }
   .mobile-navigation { display: flex; flex-direction: column; position: absolute; z-index: 20; top: 75px; left: -20px; right: -20px; background: var(--sand); border-bottom: 1px solid var(--line); padding: 18px 20px 26px; }

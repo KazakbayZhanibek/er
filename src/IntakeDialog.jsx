@@ -12,7 +12,7 @@ const fieldDetails = {
   area: { label: "Área de interés", placeholder: "Tipo de trabajo que te interesa", optional: true, wide: true },
   company: { label: "Empresa", autoComplete: "organization", placeholder: "Nombre de la empresa", wide: true },
   need: { label: "Necesidades de personal", placeholder: "Perfiles, tareas o necesidades del equipo", multiline: true, wide: true, maxLength: 1000 },
-  message: { label: "Cuéntanos un poco más", placeholder: "Tu experiencia o lo que te gustaría compartir", multiline: true, optional: true, wide: true, maxLength: 600 },
+  message: { label: "Breve carta de presentación", placeholder: "Cuéntanos quién eres, tu experiencia, tu nivel de español y el tipo de trabajo que buscas.", multiline: true, wide: true, maxLength: 1000 },
 };
 
 export default function IntakeDialog({ type, source, onClose }) {
@@ -85,6 +85,7 @@ export default function IntakeDialog({ type, source, onClose }) {
     if (!trimmed.email || emailInput.validity.typeMismatch) nextErrors.email = "Escribe un correo electrónico válido.";
     if (employer && !trimmed.company) nextErrors.company = "Escribe el nombre de tu empresa.";
     if (employer && !trimmed.need) nextErrors.need = "Cuéntanos qué tipo de personal buscas.";
+    if (!employer && !trimmed.message) nextErrors.message = "Añade una breve carta de presentación sobre ti.";
     for (const [name, message] of Object.entries(nextErrors)) form.elements.namedItem(name)?.setCustomValidity(message);
     setErrors(nextErrors);
     if (!form.reportValidity()) return;
@@ -124,7 +125,7 @@ export default function IntakeDialog({ type, source, onClose }) {
           {step === "review" ? "Revisa tus datos." : employer ? "Solicitud de personal" : "Solicitud de empleo"}
         </h2>
         <p className="intake-description" id={`${id}-description`}>
-          {step === "review" ? "Puedes volver a editar la información o cerrar esta vista previa." : employer ? "Cuéntanos qué personas necesita tu empresa." : "Cuéntanos qué tipo de oportunidad estás buscando."}
+          {step === "review" ? "Puedes volver a editar la información o cerrar esta vista previa." : employer ? "Cuéntanos qué personas necesita tu empresa." : "Presenta tu candidatura para trabajar en España con una breve carta sobre ti. Es necesario saber español."}
         </p>
         {destination && <p className="intake-destination" id={`${id}-destination`}>Interés: <strong>{destination}</strong></p>}
         <div className="intake-demo-note" id={`${id}-preview`}><strong>Vista previa.</strong> El envío todavía no está disponible. Los datos no se envían ni se guardan.</div>

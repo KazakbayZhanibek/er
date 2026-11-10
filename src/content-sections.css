@@ -43,71 +43,39 @@
   margin-bottom: 0;
 }
 
-.section-employment-paths {
-  padding-top: 6px;
-}
-
-.section-employment-path {
-  display: grid;
-  grid-template-columns: 24px minmax(0, 1fr) 30px;
-  gap: 24px;
-  width: 100%;
-  min-height: 162px;
-  padding: 30px 0;
-  border: 0;
-  border-top: 1px solid var(--line, #cdbfac);
-  border-radius: 0;
-  background: transparent;
-  color: var(--ink, #332923);
-  font: inherit;
+.section-application-cta {
+  margin-top: 32px;
+  max-width: 100%;
   text-align: left;
-  cursor: pointer;
 }
 
-.section-employment-path:last-of-type {
+.section-application-details {
+  margin: 6px 0 0;
+}
+
+.section-application-details > div {
+  padding: 26px 0;
+  border-top: 1px solid var(--line, #cdbfac);
+}
+
+.section-application-details > div:last-child {
   border-bottom: 1px solid var(--line, #cdbfac);
 }
 
-.section-path-number {
-  padding-top: 4px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--terra, #a84631);
-}
-
-.section-path-title {
-  display: block;
+.section-application-details dt {
   font-family: var(--font-display, Georgia, serif);
-  font-size: clamp(27px, 2.45vw, 37px);
+  font-size: clamp(27px, 2.25vw, 34px);
   font-weight: 400;
   line-height: 1.15;
   letter-spacing: -0.025em;
 }
 
-.section-path-description {
-  display: block;
-  max-width: 410px;
-  margin-top: 12px;
+.section-application-details dd {
+  max-width: 480px;
+  margin: 12px 0 0;
   font-size: 16px;
-  line-height: 1.55;
+  line-height: 1.65;
   color: #63564d;
-}
-
-.section-path-arrow {
-  margin-top: 4px;
-  transition: transform 160ms ease;
-}
-
-.section-preview-note {
-  max-width: 530px;
-  margin: 22px 0 0;
-  font-size: 13px;
-  line-height: 1.6;
-  color: #6c5a4e;
-}
-
-.section-preview-note span {
-  font-weight: 700;
 }
 
 .section-business {
@@ -192,6 +160,32 @@
   margin-bottom: 0;
   font-size: 17px;
   line-height: 1.75;
+}
+
+.section-additional {
+  padding-block: 80px;
+  border-top: 1px solid var(--line, #cdbfac);
+  background: var(--paper, #fbf8f2);
+}
+
+.section-additional-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: 8%;
+}
+
+.section-additional h2 {
+  margin-bottom: 0;
+  font-size: clamp(36px, 3.8vw, 56px);
+  overflow-wrap: anywhere;
+}
+
+.section-additional p {
+  max-width: 70ch;
+  font-size: 17px;
+  line-height: 1.75;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
 }
 
 .section-text-link {
@@ -359,7 +353,7 @@
   margin-bottom: 0;
 }
 
-.section-employment-path:focus-visible,
+.section-application-cta:focus-visible,
 .section-video summary:focus-visible,
 .section-text-link:focus-visible {
   outline: 2px solid var(--terra, #a84631);
@@ -367,11 +361,6 @@
 }
 
 @media (hover: hover) {
-  .section-employment-path:hover .section-path-arrow {
-    transform: translate(3px, -3px);
-  }
-
-  .section-employment-path:hover .section-path-title,
   .section-text-link:hover {
     color: var(--terra, #a84631);
   }
@@ -413,7 +402,8 @@
 
   .section-employment-layout,
   .section-business-heading,
-  .section-about-layout {
+  .section-about-layout,
+  .section-additional-layout {
     grid-template-columns: 1fr;
     gap: 36px;
   }
@@ -422,20 +412,8 @@
     max-width: 430px;
   }
 
-  .section-employment-path {
-    min-height: 0;
-    padding-block: 27px;
-    gap: 17px;
-    grid-template-columns: 20px minmax(0, 1fr) 25px;
-  }
-
-  .section-path-title {
-    font-size: 31px;
-  }
-
-  .section-path-arrow {
-    width: 25px;
-    height: 25px;
+  .section-application-details {
+    margin-top: 0;
   }
 
   .section-business {
@@ -456,6 +434,14 @@
   }
 
   .section-about-bottom p {
+    font-size: 16px;
+  }
+
+  .section-additional {
+    padding-block: 64px;
+  }
+
+  .section-additional p {
     font-size: 16px;
   }
 
@@ -485,12 +471,10 @@
 }
 
 @media (max-width: 380px) {
-  .section-path-title {
-    font-size: 27px;
-  }
-
-  .section-employment-path {
-    gap: 12px;
+  .section-application-cta {
+    gap: 18px;
+    padding-inline: 18px;
+    font-size: 15px;
   }
 
   .section-business .section-business-cta {
@@ -498,10 +482,4 @@
     padding-inline: 18px;
   }
 
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .section-path-arrow {
-    transition: none;
-  }
 }

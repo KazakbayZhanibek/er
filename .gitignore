@@ -12,3 +12,6 @@ dist/
 AGENTS.md
 design-qa.md
 qa/
+
+# Private management data, sessions and local credentials.
+.kompas-data/
