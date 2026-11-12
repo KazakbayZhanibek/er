@@ -5,9 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && vite build --config vite.admin.config.mjs && node scripts/prepare-sites-build.mjs",
-    "admin": "node server/start.mjs",
-    "test:admin": "node --test tests/admin-server.test.mjs",
+    "build": "vite build && node scripts/prepare-sites-build.mjs",
     "deploy:pages": "npm run build && node scripts/publish-pages.mjs",
     "preview": "vite preview",
     "test:sites": "node --test tests/sites-worker.test.mjs"

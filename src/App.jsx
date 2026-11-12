@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, ArrowUpRight, List, X } from '@phosphor-icons/react';
 import ContentSections, { AdditionalSections, EmployerSection } from './ContentSections.jsx';
 import IntakeDialog from './IntakeDialog.jsx';
-import useSiteContent from './useSiteContent.js';
+import content from './content/site.json';
 
 const navigation = [
   ['Primeros pasos', '#incorporacion'],
@@ -12,7 +12,6 @@ const navigation = [
 ];
 
 export function App() {
-  const content = useSiteContent();
   const text = content.texts;
   const [menuOpen, setMenuOpen] = useState(false);
   const [intake, setIntake] = useState(null);
