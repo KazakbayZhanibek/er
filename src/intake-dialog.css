@@ -38,6 +38,8 @@
 .intake-field [aria-invalid="true"] { border-color: #9d3024; }
 .intake-error, .intake-error-summary { margin: 7px 0 0; color: #922d21; font-size: 12px; line-height: 1.5; }
 .intake-error-summary { margin-top: 16px; }
+.intake-honeypot { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.intake-submit-error { margin: 20px 0 0; padding: 13px 15px; border-left: 2px solid #922d21; background: #f7e8e2; color: #76271f; font-size: 13px; line-height: 1.6; }
 .intake-actions { display: flex; flex-direction: column; gap: 16px; margin-top: 28px; padding-top: 23px; border-top: 1px solid rgba(51, 41, 35, .17); }
 .intake-required-note { font-size: 11px; line-height: 1.5; color: #706053; }
 .intake-action { display: inline-flex; justify-content: center; align-items: center; gap: 14px; min-height: 52px; padding: 14px 20px; border: 1px solid transparent; border-radius: 3px; font: inherit; font-size: 14px; font-weight: 500; line-height: 1.4; cursor: pointer; transition: background .16s, border-color .16s; }
@@ -46,6 +48,7 @@
 .intake-action-primary:hover { background: #913b28; }
 .intake-action-secondary { color: var(--ink, #332923); background: transparent; border-color: #9c8c7d; }
 .intake-action-secondary:hover { background: var(--sand, #f3e8d7); }
+.intake-action:disabled { cursor: wait; opacity: .65; }
 .intake-action:focus-visible, .intake-close:focus-visible { outline: 2px solid var(--ink, #332923); outline-offset: 4px; }
 .intake-review-list { margin: 0; }
 .intake-review-list > div { display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 18px; padding: 18px 0; border-bottom: 1px solid rgba(51, 41, 35, .15); }
@@ -53,6 +56,9 @@
 .intake-review-list dd { margin: 0; font-size: 15px; line-height: 1.6; white-space: pre-wrap; overflow-wrap: anywhere; }
 .intake-review-actions { flex-direction: row; border-top: 0; margin-top: 24px; padding-top: 0; }
 .intake-review-actions .intake-action-primary { flex: 1; }
+.intake-success { margin-top: 28px; padding-top: 24px; border-top: 1px solid rgba(51, 41, 35, .17); }
+.intake-success p { margin: 0 0 12px; color: #66564a; font-size: 15px; line-height: 1.65; }
+.intake-success strong { color: var(--ink, #332923); font-weight: 600; }
 
 @media (max-width: 540px) {
   .intake-dialog { width: calc(100vw - 24px); max-height: calc(100dvh - 24px); }

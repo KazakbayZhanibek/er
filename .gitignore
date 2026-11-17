@@ -7,6 +7,9 @@ dist/
 .env
 .env.*
 !.env.example
+.dev.vars
+application-worker/.dev.vars
+.wrangler/
 
 # Local working notes and visual review captures.
 AGENTS.md
