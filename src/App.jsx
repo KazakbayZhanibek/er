@@ -2,17 +2,17 @@ import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, ArrowUpRight, List, X } from '@phosphor-icons/react';
 import ContentSections, { AdditionalSections, EmployerSection } from './ContentSections.jsx';
 import IntakeDialog from './IntakeDialog.jsx';
+import { contentAssetUrl } from './content-assets.js';
 import content from './content/site.json';
-
-const navigation = [
-  ['Primeros pasos', '#incorporacion'],
-  ['Empleo', '#empleo'],
-  ['Sobre Kompas', '#nosotros'],
-  ['Contacto', '#contacto'],
-];
 
 export function App() {
   const text = content.texts;
+  const navigation = [
+    [text.navOnboarding, '#incorporacion'],
+    [text.navEmployment, '#empleo'],
+    [text.navAbout, '#nosotros'],
+    [text.navContact, '#contacto'],
+  ];
   const [menuOpen, setMenuOpen] = useState(false);
   const [intake, setIntake] = useState(null);
   const menuButton = useRef(null);
@@ -61,14 +61,14 @@ export function App() {
             <div className="hero-bottom">
               <p className="hero-description">{text.heroDescription}</p>
               <div className="hero-actions">
-                <a href="#empleo" className="button button-primary">Busco empleo<ArrowRight size={27} weight="regular" aria-hidden="true" /></a>
-                <a href="#incorporacion" className="button button-outline">Ver los vídeos<ArrowRight size={27} weight="regular" aria-hidden="true" /></a>
+                <a href="#empleo" className="button button-primary">{text.heroPrimaryAction}<ArrowRight size={27} weight="regular" aria-hidden="true" /></a>
+                <a href="#incorporacion" className="button button-outline">{text.heroSecondaryAction}<ArrowRight size={27} weight="regular" aria-hidden="true" /></a>
               </div>
             </div>
           </div>
           <figure className="hero-image-wrap">
-            <img className="hero-image" src={`${import.meta.env.BASE_URL}images/hero-team.webp`} alt="Cuatro personas conversando alrededor de una mesa en un espacio de trabajo luminoso. Imagen ilustrativa." width="2172" height="724" fetchPriority="high" />
-            <figcaption className="container">El siguiente paso, juntos.</figcaption>
+            <img className="hero-image" src={contentAssetUrl(content.media.heroImage)} alt={content.media.heroImageAlt} width="2172" height="724" fetchPriority="high" />
+            <figcaption className="container">{text.heroCaption}</figcaption>
           </figure>
         </section>
 
@@ -77,11 +77,11 @@ export function App() {
 
         <section className="contact-section" id="contacto" aria-labelledby="contact-title">
           <div className="container contact-layout">
-            <div><p className="eyebrow">Empecemos por una conversación</p><h2 id="contact-title">{text.contactTitleFirst}<br />{text.contactTitleSecond}</h2></div>
+            <div><p className="eyebrow">{text.contactEyebrow}</p><h2 id="contact-title">{text.contactTitleFirst}<br />{text.contactTitleSecond}</h2></div>
             <div className="contact-choices">
               <p className="contact-hours">{text.contactHours}</p>
               <p className="contact-response">{text.contactResponse}</p>
-              <button onClick={() => openIntake('candidate')} className="contact-choice"><span><small>Para personas</small>Quiero encontrar empleo</span><ArrowUpRight size={31} aria-hidden="true" /></button>
+              <button onClick={() => openIntake('candidate')} className="contact-choice"><span><small>{text.contactAudience}</small>{text.contactAction}</span><ArrowUpRight size={31} aria-hidden="true" /></button>
             </div>
           </div>
         </section>
@@ -91,13 +91,13 @@ export function App() {
       <footer className="site-footer container">
         <div className="footer-top">
           <a className="brand" href="#inicio" aria-label="Volver al inicio de Kompas"><span className="brand-monogram" aria-hidden="true">K<span>·</span></span></a>
-          <p>Personas y oportunidades,<br />en la misma dirección.</p>
+          <p>{text.footerTagline.split('\n').map((line, index) => <span key={line}>{index > 0 && <br />}{line}</span>)}</p>
           <div className="footer-links">
-            <a className="footer-top-link" href="#empresas">Para empresas<ArrowUpRight size={21} aria-hidden="true" /></a>
-            <a className="footer-top-link" href="#inicio">Volver arriba<ArrowUpRight size={21} aria-hidden="true" /></a>
+            <a className="footer-top-link" href="#empresas">{text.footerEmployerLink}<ArrowUpRight size={21} aria-hidden="true" /></a>
+            <a className="footer-top-link" href="#inicio">{text.footerBackLink}<ArrowUpRight size={21} aria-hidden="true" /></a>
           </div>
         </div>
-        <div className="footer-bottom"><span>Kompas · España</span><span>Prototipo de diseño · Imágenes ilustrativas · Formularios de demostración</span></div>
+        <div className="footer-bottom"><span>{text.footerLocation}</span><span>{text.footerNotice}</span></div>
       </footer>
       <IntakeDialog type={intake?.type ?? null} source={intake?.source} onClose={() => setIntake(null)} />
     </>

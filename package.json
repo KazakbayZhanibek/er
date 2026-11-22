@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node scripts/prepare-sites-build.mjs",
+    "validate:content": "node scripts/validate-content.mjs",
+    "build": "npm run validate:content && vite build && node scripts/prepare-sites-build.mjs",
     "deploy:pages": "npm run build && node scripts/publish-pages.mjs",
     "preview": "vite preview",
     "test:applications": "node --test tests/application-worker.test.mjs",

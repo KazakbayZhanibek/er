@@ -1,0 +1,194 @@
+media:
+  - name: site_images
+    label: Imágenes del sitio
+    input: public/images/uploads
+    output: images/uploads
+    extensions: [jpg, jpeg, png, webp]
+    categories: [image]
+    rename: safe
+
+settings:
+  hide: true
+  content:
+    merge: true
+  commit:
+    identity: user
+    templates:
+      update: "Actualizar contenido del sitio"
+      create: "Añadir {filename}"
+      delete: "Eliminar {filename}"
+      rename: "Renombrar {oldFilename} a {newFilename}"
+
+content:
+  - name: homepage
+    label: Página principal
+    type: file
+    path: src/content/site.json
+    format: json
+    operations:
+      create: false
+      rename: false
+      delete: false
+    fields:
+      - name: schemaVersion
+        type: number
+        hidden: true
+        readonly: true
+
+      - name: texts
+        label: Textos del sitio
+        type: object
+        required: true
+        fields:
+          - { name: navOnboarding, label: Menú · Primeros pasos, type: string, required: true }
+          - { name: navEmployment, label: Menú · Empleo, type: string, required: true }
+          - { name: navAbout, label: Menú · Sobre Kompas, type: string, required: true }
+          - { name: navContact, label: Menú · Contacto, type: string, required: true }
+          - { name: heroEyebrow, label: Portada · Etiqueta, type: string, required: true }
+          - { name: heroTitleFirst, label: Portada · Título (línea 1), type: string, required: true }
+          - { name: heroTitleSecond, label: Portada · Título (línea 2), type: string, required: true }
+          - { name: heroDescription, label: Portada · Descripción, type: text, required: true }
+          - { name: heroPrimaryAction, label: Portada · Botón empleo, type: string, required: true }
+          - { name: heroSecondaryAction, label: Portada · Botón vídeos, type: string, required: true }
+          - { name: heroCaption, label: Portada · Pie de imagen, type: string, required: true }
+          - { name: onboardingEyebrow, label: Vídeos · Etiqueta, type: string, required: true }
+          - { name: onboardingTitle, label: Vídeos · Título, type: string, required: true }
+          - { name: onboardingDescription, label: Vídeos · Descripción, type: text, required: true }
+          - { name: employmentEyebrow, label: Empleo · Etiqueta, type: string, required: true }
+          - { name: employmentTitleFirst, label: Empleo · Título (línea 1), type: string, required: true }
+          - { name: employmentTitleSecond, label: Empleo · Título (línea 2), type: string, required: true }
+          - { name: employmentIntro, label: Empleo · Introducción, type: text, required: true }
+          - { name: employmentAction, label: Empleo · Botón, type: string, required: true }
+          - { name: languageTitle, label: Español · Título, type: string, required: true }
+          - { name: languageDescription, label: Español · Descripción, type: text, required: true }
+          - { name: conditionsTitle, label: Condiciones · Título, type: string, required: true }
+          - { name: conditionsDescription, label: Condiciones · Descripción, type: text, required: true }
+          - { name: supportTitle, label: Acompañamiento · Título, type: string, required: true }
+          - { name: supportDescription, label: Acompañamiento · Descripción, type: text, required: true }
+          - { name: aboutEyebrow, label: Kompas · Etiqueta, type: string, required: true }
+          - { name: aboutTitleFirst, label: Kompas · Título (línea 1), type: string, required: true }
+          - { name: aboutTitleSecond, label: Kompas · Título (línea 2), type: string, required: true }
+          - { name: aboutDescription, label: Kompas · Descripción, type: text, required: true }
+          - { name: aboutAction, label: Kompas · Enlace, type: string, required: true }
+          - { name: contactEyebrow, label: Contacto · Etiqueta, type: string, required: true }
+          - { name: contactTitleFirst, label: Contacto · Título (línea 1), type: string, required: true }
+          - { name: contactTitleSecond, label: Contacto · Título (línea 2), type: string, required: true }
+          - { name: contactHours, label: Contacto · Horario, type: string, required: true }
+          - { name: contactResponse, label: Contacto · Tiempo de respuesta, type: text, required: true }
+          - { name: contactAudience, label: Contacto · Tipo de público, type: string, required: true }
+          - { name: contactAction, label: Contacto · Botón, type: string, required: true }
+          - { name: employerEyebrow, label: Empresas · Etiqueta, type: string, required: true }
+          - { name: employerTitleFirst, label: Empresas · Título (línea 1), type: string, required: true }
+          - { name: employerTitleSecond, label: Empresas · Título (línea 2), type: string, required: true }
+          - { name: employerDescription, label: Empresas · Descripción, type: text, required: true }
+          - { name: employerAction, label: Empresas · Botón, type: string, required: true }
+          - { name: footerTagline, label: Pie · Frase, type: text, required: true }
+          - { name: footerEmployerLink, label: Pie · Enlace empresas, type: string, required: true }
+          - { name: footerBackLink, label: Pie · Volver arriba, type: string, required: true }
+          - { name: footerLocation, label: Pie · Ubicación, type: string, required: true }
+          - { name: footerNotice, label: Pie · Aviso, type: string, required: true }
+
+      - name: media
+        label: Imágenes principales
+        type: object
+        required: true
+        fields:
+          - name: heroImage
+            label: Imagen de portada
+            type: image
+            required: true
+            options:
+              media: site_images
+              extensions: [jpg, jpeg, png, webp]
+              rename: safe
+          - name: heroImageAlt
+            label: Descripción accesible de la imagen
+            type: text
+            required: true
+            description: Describe brevemente lo que aparece en la imagen, sin usar palabras como «foto de».
+
+      - name: blocks
+        label: Bloques adicionales
+        description: Añade, oculta o cambia el orden de bloques prediseñados. El diseño general del sitio no se modifica.
+        type: block
+        blockKey: type
+        list:
+          max: 12
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        blocks:
+          - name: text
+            label: Texto en dos columnas
+            fields:
+              - name: id
+                type: uuid
+                label: Identificador
+                options:
+                  editable: false
+                  generate: false
+              - { name: enabled, label: Mostrar bloque, type: boolean, default: true }
+              - { name: eyebrow, label: Etiqueta pequeña, type: string, required: false }
+              - { name: title, label: Título, type: string, required: true }
+              - { name: body, label: Texto, type: text, required: true }
+
+          - name: image_text
+            label: Imagen y texto
+            fields:
+              - name: id
+                type: uuid
+                label: Identificador
+                options:
+                  editable: false
+                  generate: false
+              - { name: enabled, label: Mostrar bloque, type: boolean, default: true }
+              - { name: eyebrow, label: Etiqueta pequeña, type: string, required: false }
+              - { name: title, label: Título, type: string, required: true }
+              - { name: body, label: Texto, type: text, required: true }
+              - name: image
+                label: Imagen
+                type: image
+                required: true
+                options:
+                  media: site_images
+                  extensions: [jpg, jpeg, png, webp]
+                  rename: safe
+              - name: imageAlt
+                label: Descripción accesible de la imagen
+                type: text
+                required: true
+              - name: imageSide
+                label: Posición de la imagen
+                type: select
+                required: true
+                default: right
+                options:
+                  values:
+                    - { name: right, label: Derecha }
+                    - { name: left, label: Izquierda }
+
+          - name: callout
+            label: Llamada a la acción
+            fields:
+              - name: id
+                type: uuid
+                label: Identificador
+                options:
+                  editable: false
+                  generate: false
+              - { name: enabled, label: Mostrar bloque, type: boolean, default: true }
+              - { name: eyebrow, label: Etiqueta pequeña, type: string, required: false }
+              - { name: title, label: Título, type: string, required: true }
+              - { name: body, label: Texto, type: text, required: true }
+              - { name: buttonLabel, label: Texto del botón, type: string, required: true }
+              - name: buttonTarget
+                label: Destino del botón
+                type: select
+                required: true
+                default: "#contacto"
+                options:
+                  values:
+                    - { name: "#empleo", label: Solicitud de empleo }
+                    - { name: "#incorporacion", label: Vídeos de bienvenida }
+                    - { name: "#contacto", label: Contacto }
+                    - { name: "#empresas", label: Para empresas }

@@ -156,7 +156,7 @@ export default function IntakeDialog({ type, source, onClose }) {
           {step === "success"
             ? employer ? "Gracias. Un responsable de Kompas revisará la información y se pondrá en contacto contigo." : "Gracias por enviar tu información. Nos pondremos en contacto contigo en un plazo de 24 horas."
             : step === "review" ? (applicationSubmissionEnabled ? "Comprueba la información antes de enviarla." : "Puedes volver a editar la información o cerrar esta vista previa.")
-              : employer ? "Cuéntanos qué personas necesita tu empresa." : "Presenta tu candidatura para trabajar en España con una breve carta sobre ti. Es necesario saber español."}
+              : employer ? "Cuéntanos qué personas necesita tu empresa." : "Presenta tu candidatura para trabajar con Kompas y empresas colaboradoras. Añade una breve carta sobre ti."}
         </p>
         {destination && <p className="intake-destination" id={`${id}-destination`}>Interés: <strong>{destination}</strong></p>}
         {step !== "success" && <div className="intake-demo-note" id={`${id}-preview`}>
@@ -207,7 +207,7 @@ export default function IntakeDialog({ type, source, onClose }) {
         ) : (
           <div className="intake-success" role="status">
             {!employer && <p>También recibirás un correo de confirmación en <strong>{values.email}</strong>.</p>}
-            <p>Horario de atención: de 9:00 a 18:00, hora de Madrid.</p>
+            <p>Horario de atención: de 9:00 a 18:00.</p>
             <div className="intake-actions"><button type="button" className="intake-action intake-action-primary" onClick={close}>Cerrar</button></div>
           </div>
         )}
