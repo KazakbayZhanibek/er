@@ -161,7 +161,7 @@ export default function IntakeDialog({ type, source, onClose }) {
         {destination && <p className="intake-destination" id={`${id}-destination`}>Interés: <strong>{destination}</strong></p>}
         {step !== "success" && <div className="intake-demo-note" id={`${id}-preview`}>
           {applicationSubmissionEnabled
-            ? <><strong>Envío de solicitud.</strong> Los datos se enviarán a Kompas para gestionar esta solicitud.</>
+            ? <>Kompas utilizará los datos que envíes para gestionar tu solicitud y ponerse en contacto contigo. Los datos del formulario se conservarán en nuestra base de solicitudes durante 30 días.</>
             : <><strong>Vista previa.</strong> El envío todavía no está disponible. Los datos no se envían ni se guardan.</>}
         </div>}
 

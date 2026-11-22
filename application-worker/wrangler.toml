@@ -2,6 +2,7 @@ name = "kompas-applications"
 main = "src/index.mjs"
 compatibility_date = "2026-11-17"
 workers_dev = true
+routes = [{ pattern = "applications.kompastrabajo.com", custom_domain = true }]
 
 [triggers]
 crons = ["*/5 * * * *"]
@@ -9,10 +10,10 @@ crons = ["*/5 * * * *"]
 [[d1_databases]]
 binding = "APPLICATIONS"
 database_name = "kompas-applications"
-database_id = "REPLACE_WITH_D1_DATABASE_ID"
+database_id = "11bebc9d-7d73-48cf-92fc-05694c1c6f71"
+jurisdiction = "eu"
 migrations_dir = "migrations"
 
 [vars]
 ALLOWED_ORIGINS = "https://kompastrabajo.com,https://www.kompastrabajo.com,https://kazakbayzhanibek.github.io,http://127.0.0.1:4173"
-# Предварительный технический срок. Подтвердить до рабочего запуска.
 RETENTION_DAYS = "30"

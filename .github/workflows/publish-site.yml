@@ -35,6 +35,8 @@ jobs:
         run: npm run test:applications
 
       - name: Build production website
+        env:
+          VITE_APPLICATION_API_URL: https://applications.kompastrabajo.com
         run: npm run build
 
       - name: Test static hosting package
