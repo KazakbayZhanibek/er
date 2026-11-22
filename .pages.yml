@@ -88,6 +88,39 @@ content:
           - { name: footerLocation, label: Pie · Ubicación, type: string, required: true }
           - { name: footerNotice, label: Pie · Aviso, type: string, required: true }
 
+      - name: videos
+        label: Vídeos de bienvenida
+        type: object
+        fields:
+          - name: welcome
+            label: Guía 01
+            type: object
+            fields:
+              - { name: title, label: Título de la tarjeta, type: string, required: true, options: { maxlength: 120 } }
+              - { name: description, label: Descripción de la tarjeta, type: text, required: true, options: { maxlength: 400 } }
+              - name: poster
+                label: Imagen de portada (opcional)
+                type: image
+                description: Elige una imagen horizontal. Deja el campo vacío para recuperar la portada original.
+                options:
+                  media: site_images
+                  extensions: [jpg, jpeg, png, webp]
+                  rename: safe
+          - name: firstDay
+            label: Guía 02
+            type: object
+            fields:
+              - { name: title, label: Título de la tarjeta, type: string, required: true, options: { maxlength: 120 } }
+              - { name: description, label: Descripción de la tarjeta, type: text, required: true, options: { maxlength: 400 } }
+              - name: poster
+                label: Imagen de portada (opcional)
+                type: image
+                description: Elige una imagen horizontal. Deja el campo vacío para recuperar la portada original.
+                options:
+                  media: site_images
+                  extensions: [jpg, jpeg, png, webp]
+                  rename: safe
+
       - name: media
         label: Imágenes principales
         type: object
@@ -192,3 +225,85 @@ content:
                     - { name: "#incorporacion", label: Vídeos de bienvenida }
                     - { name: "#contacto", label: Contacto }
                     - { name: "#empresas", label: Para empresas }
+
+          - name: faq
+            label: Preguntas frecuentes
+            fields:
+              - { name: id, label: Identificador, type: uuid, options: { editable: false, generate: false } }
+              - { name: enabled, label: Mostrar bloque, type: boolean, default: true }
+              - { name: eyebrow, label: Etiqueta pequeña, type: string }
+              - { name: title, label: Título, type: string, required: true }
+              - { name: body, label: Introducción (opcional), type: text }
+              - name: questions
+                label: Preguntas
+                description: Añade de 1 a 12 preguntas con su respuesta. El visitante puede desplegar cada respuesta.
+                type: object
+                required: true
+                list:
+                  min: 1
+                  max: 12
+                  collapsible:
+                    collapsed: false
+                    summary: "{question}"
+                fields:
+                  - { name: question, label: Pregunta, type: string, description: Máximo 180 caracteres., required: true, pattern: '^.{1,180}$' }
+                  - { name: answer, label: Respuesta, type: text, description: Máximo 1600 caracteres., required: true, pattern: '^[\s\S]{1,1600}$' }
+
+          - name: list
+            label: Lista
+            fields:
+              - { name: id, label: Identificador, type: uuid, options: { editable: false, generate: false } }
+              - { name: enabled, label: Mostrar bloque, type: boolean, default: true }
+              - { name: eyebrow, label: Etiqueta pequeña, type: string }
+              - { name: title, label: Título, type: string, required: true }
+              - { name: body, label: Introducción (opcional), type: text }
+              - name: listStyle
+                label: Estilo de lista
+                type: select
+                default: bullets
+                required: true
+                options:
+                  values:
+                    - { name: bullets, label: Con viñetas }
+                    - { name: numbered, label: Numerada }
+              - name: items
+                label: Elementos
+                description: Añade de 1 a 20 elementos. Usa hasta 300 caracteres por elemento.
+                type: string
+                required: true
+                list: { min: 1, max: 20 }
+                pattern: '^.{1,300}$'
+
+  - name: publication
+    label: Aviso y pestaña del navegador
+    type: file
+    path: src/content/publication.json
+    format: json
+    operations: { create: false, rename: false, delete: false }
+    fields:
+      - name: announcement
+        label: Aviso en portada
+        type: object
+        required: true
+        fields:
+          - { name: enabled, label: Mostrar aviso, type: boolean, default: false }
+          - { name: message, label: Texto del aviso, type: text, description: Hasta 240 caracteres. Obligatorio al mostrar el aviso. }
+          - name: destination
+            label: Destino del enlace
+            type: select
+            default: none
+            options:
+              values:
+                - { name: none, label: Sin enlace }
+                - { name: "#empleo", label: Solicitud de empleo }
+                - { name: "#incorporacion", label: Vídeos de bienvenida }
+                - { name: "#contacto", label: Contacto }
+                - { name: "#empresas", label: Para empresas }
+          - { name: linkLabel, label: Texto del enlace, type: string, description: Hasta 60 caracteres. Obligatorio si eliges un destino. }
+      - name: page
+        label: Datos de página
+        type: object
+        required: true
+        fields:
+          - { name: title, label: Título de la pestaña, type: string, required: true, description: Hasta 100 caracteres. }
+          - { name: description, label: Descripción de la página, type: text, required: true, description: Hasta 300 caracteres. }

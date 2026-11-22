@@ -1,0 +1,12 @@
+{
+  "announcement": {
+    "enabled": false,
+    "message": "",
+    "destination": "none",
+    "linkLabel": ""
+  },
+  "page": {
+    "title": "Kompas — Personas y oportunidades",
+    "description": "Kompas: empleo y selección de personal. Personas y oportunidades, en la misma dirección."
+  }
+}

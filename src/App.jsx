@@ -4,6 +4,7 @@ import ContentSections, { AdditionalSections, EmployerSection } from './ContentS
 import IntakeDialog from './IntakeDialog.jsx';
 import { contentAssetUrl } from './content-assets.js';
 import content from './content/site.json';
+import publication from './content/publication.json';
 
 export function App() {
   const text = content.texts;
@@ -54,6 +55,16 @@ export function App() {
       </header>
 
       <main id="contenido">
+        {publication.announcement.enabled && (
+          <aside className="site-announcement" aria-label="Aviso">
+            <div className="container">
+              <p>{publication.announcement.message}</p>
+              {publication.announcement.destination && publication.announcement.destination !== 'none' && (
+                <a href={publication.announcement.destination}>{publication.announcement.linkLabel}</a>
+              )}
+            </div>
+          </aside>
+        )}
         <section className="hero" aria-labelledby="hero-title">
           <div className="container hero-content">
             <p className="eyebrow hero-eyebrow">{text.heroEyebrow}</p>

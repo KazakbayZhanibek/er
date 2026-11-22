@@ -233,6 +233,57 @@
 
 .section-additional-callout-action:focus-visible { outline-color: var(--sand, #f3e8d7); }
 
+.section-additional p.section-additional-intro {
+  margin: 18px 0 0;
+}
+
+.section-faq,
+.section-editor-list {
+  min-width: 0;
+  align-self: start;
+  overflow-wrap: anywhere;
+}
+
+.section-faq details {
+  border-block-start: 1px solid var(--line, #cdbfac);
+}
+
+.section-faq details:last-child {
+  border-block-end: 1px solid var(--line, #cdbfac);
+}
+
+.section-faq summary {
+  cursor: pointer;
+  padding-block: 16px;
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+.section-faq summary::marker,
+.section-editor-list li::marker {
+  color: var(--terra, #a84631);
+}
+
+.section-faq summary:focus-visible {
+  outline: 2px solid var(--terra, #a84631);
+  outline-offset: 2px;
+}
+
+.section-faq details p {
+  margin: 0 0 20px;
+}
+
+.section-editor-list {
+  margin: 0;
+  padding-inline-start: 1.7em;
+}
+
+.section-editor-list li {
+  padding: 8px 0 8px 5px;
+  font-size: 17px;
+  line-height: 1.65;
+}
+
 .section-text-link {
   display: inline-flex;
   align-items: center;

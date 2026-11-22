@@ -3,8 +3,9 @@ import { ArrowRight, ArrowUpRight, Plus, Minus } from '@phosphor-icons/react';
 import { contentAssetUrl } from './content-assets.js';
 import './content-sections.css';
 
-const videos = [
+const originalVideos = [
   {
+    key: 'welcome',
     number: '01',
     title: 'Bienvenido a Kompas',
     description: 'Conoce las dos vías de empleo de Kompas y cómo aclarar tus dudas antes de empezar.',
@@ -20,6 +21,7 @@ const videos = [
     ],
   },
   {
+    key: 'firstDay',
     number: '02',
     title: 'Tu primer día',
     description: 'Qué confirmar antes de salir, cómo preparar la llegada y cuándo pedir orientación.',
@@ -40,6 +42,15 @@ const videos = [
 export default function ContentSections({ onOpenIntake, content }) {
   const playerRefs = useRef([]);
   const { texts } = content;
+  const videos = originalVideos.map((original) => {
+    const card = content.videos?.[original.key];
+    return {
+      ...original,
+      title: card?.title ?? original.title,
+      description: card?.description ?? original.description,
+      poster: card?.poster || `media/${original.file}-poster.webp`,
+    };
+  });
   const applicationDetails = [
     { id: 'language', title: texts.languageTitle, description: texts.languageDescription },
     { id: 'conditions', title: texts.conditionsTitle, description: texts.conditionsDescription },
@@ -78,7 +89,7 @@ export default function ContentSections({ onOpenIntake, content }) {
                   controls
                   playsInline
                   preload="none"
-                  poster={`${import.meta.env.BASE_URL}media/${video.file}-poster.webp`}
+                  poster={contentAssetUrl(video.poster)}
                   aria-labelledby={`video-title-${video.number}`}
                   aria-describedby={`video-language-${video.number}`}
                   onPlay={(event) => pauseOtherVideos(event.currentTarget)}
@@ -173,6 +184,33 @@ export function EmployerSection({ onOpenIntake, content }) {
 export function AdditionalSections({ blocks }) {
   return (Array.isArray(blocks) ? blocks : []).filter((block) => block.enabled !== false).map((block) => {
     const titleId = `additional-title-${block.id}`;
+    if (block.type === 'faq' || block.type === 'list') {
+      const List = block.listStyle === 'numbered' ? 'ol' : 'ul';
+      return <section className="content-section section-additional" id={`additional-${block.id}`}
+        aria-labelledby={titleId} key={block.id}>
+        <div className="container section-additional-layout">
+          <div>
+            {block.eyebrow && <p className="eyebrow">{block.eyebrow}</p>}
+            <h2 id={titleId}>{block.title}</h2>
+            {block.body && <p className="section-additional-intro">{block.body}</p>}
+          </div>
+          {block.type === 'faq' ? (
+            <div className="section-faq">
+              {block.questions.map(({ question, answer }, index) => (
+                <details key={index}>
+                  <summary>{question}</summary>
+                  <p>{answer}</p>
+                </details>
+              ))}
+            </div>
+          ) : (
+            <List className="section-editor-list">
+              {block.items.map((item, index) => <li key={index}>{item}</li>)}
+            </List>
+          )}
+        </div>
+      </section>;
+    }
     if (block.type === 'image_text') {
       return <section className={`content-section section-additional section-additional--image section-additional--image-${block.imageSide || 'right'}`}
         id={`additional-${block.id}`} aria-labelledby={titleId} key={block.id}>

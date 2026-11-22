@@ -1,11 +1,12 @@
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { validateVideoCards } from "./validate-video-cards.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const contentPath = path.join(root, "src/content/site.json");
 const allowedImageExtensions = new Set([".jpg", ".jpeg", ".png", ".webp"]);
-const allowedBlockTypes = new Set(["text", "image_text", "callout"]);
+const allowedBlockTypes = new Set(["text", "image_text", "callout", "faq", "list"]);
 const allowedTargets = new Set(["#empleo", "#incorporacion", "#contacto", "#empresas"]);
 const errors = [];
 
@@ -33,6 +34,15 @@ function image(value, label) {
 }
 
 let content;
+const publication = JSON.parse(readFileSync(path.join(root, "src/content/publication.json"), "utf8"));
+const { announcement, page } = publication;
+text(page?.title, "Título de la pestaña", 100);
+text(page?.description, "Descripción de la página", 300);
+if (!announcement || typeof announcement.enabled !== "boolean") fail("Mostrar aviso: valor no válido.");
+const target = announcement?.destination || "none";
+if (target !== "none" && !allowedTargets.has(target)) fail("Destino del enlace: destino no permitido.");
+text(announcement?.message ?? "", "Texto del aviso", 240, !announcement?.enabled);
+text(announcement?.linkLabel ?? "", "Texto del enlace", 60, target === "none");
 try {
   content = JSON.parse(readFileSync(contentPath, "utf8"));
 } catch (error) {
@@ -43,17 +53,21 @@ if (content.schemaVersion !== 2) fail("schemaVersion debe ser 2.");
 if (!content.texts || typeof content.texts !== "object") fail("Falta el grupo texts.");
 else for (const [name, value] of Object.entries(content.texts)) text(value, `texts.${name}`, name.toLowerCase().includes("description") || name.includes("Intro") || name.includes("Response") || name.includes("Tagline") ? 1600 : 220);
 
+validateVideoCards(content.videos, { text, image, fail });
+
 if (!content.media || typeof content.media !== "object") fail("Falta el grupo media.");
 else {
   image(content.media.heroImage, "media.heroImage");
   text(content.media.heroImageAlt, "media.heroImageAlt", 300);
 }
 
-if (!Array.isArray(content.blocks)) fail("blocks debe ser una lista.");
+// Pages CMS removes the key when the editor deletes the last optional block.
+const blocks = content.blocks ?? [];
+if (!Array.isArray(blocks)) fail("blocks debe ser una lista.");
 else {
-  if (content.blocks.length > 12) fail("blocks: máximo 12 bloques.");
+  if (blocks.length > 12) fail("blocks: máximo 12 bloques.");
   const ids = new Set();
-  content.blocks.forEach((block, index) => {
+  blocks.forEach((block, index) => {
     const label = `blocks[${index}]`;
     if (!block || typeof block !== "object") return fail(`${label}: bloque no válido.`);
     if (!allowedBlockTypes.has(block.type)) fail(`${label}.type: tipo no permitido.`);
@@ -63,7 +77,25 @@ else {
     if (block.enabled !== undefined && typeof block.enabled !== "boolean") fail(`${label}.enabled: debe ser verdadero o falso.`);
     text(block.eyebrow, `${label}.eyebrow`, 80, true);
     text(block.title, `${label}.title`, 180);
-    text(block.body, `${label}.body`, 3000);
+    text(block.body, `${label}.body`, 3000, block.type === "faq" || block.type === "list");
+    if (block.type === "faq") {
+      if (!Array.isArray(block.questions) || block.questions.length < 1 || block.questions.length > 12) {
+        fail(`${label}.questions: se requieren entre 1 y 12 preguntas.`);
+      } else {
+        block.questions.forEach((entry, questionIndex) => {
+          text(entry?.question, `${label}.questions[${questionIndex}].question`, 180);
+          text(entry?.answer, `${label}.questions[${questionIndex}].answer`, 1600);
+        });
+      }
+    }
+    if (block.type === "list") {
+      if (!["bullets", "numbered"].includes(block.listStyle)) fail(`${label}.listStyle: usa bullets o numbered.`);
+      if (!Array.isArray(block.items) || block.items.length < 1 || block.items.length > 20) {
+        fail(`${label}.items: se requieren entre 1 y 20 elementos.`);
+      } else {
+        block.items.forEach((item, itemIndex) => text(item, `${label}.items[${itemIndex}]`, 300));
+      }
+    }
     if (block.type === "image_text") {
       image(block.image, `${label}.image`);
       text(block.imageAlt, `${label}.imageAlt`, 300);

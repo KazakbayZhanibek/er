@@ -49,8 +49,18 @@
     "footerLocation": "Kompas",
     "footerNotice": "Prototipo de diseño · Imágenes ilustrativas · Formularios de demostración"
   },
+  "videos": {
+    "welcome": {
+      "title": "Bienvenido a Kompas",
+      "description": "Conoce las dos vías de empleo de Kompas y cómo aclarar tus dudas antes de empezar."
+    },
+    "firstDay": {
+      "title": "Tu primer día",
+      "description": "Qué confirmar antes de salir, cómo preparar la llegada y cuándo pedir orientación."
+    }
+  },
   "media": {
-    "heroImage": "images/hero-team.webp",
+    "heroImage": "images/uploads/hero-team.webp",
     "heroImageAlt": "Cuatro personas conversando alrededor de una mesa en un espacio de trabajo luminoso. Imagen ilustrativa."
   },
   "blocks": []
